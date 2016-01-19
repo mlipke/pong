@@ -7,9 +7,11 @@ authors = [
 ]
 
 [[bin]]
+
 name = "pong"
 
 [dependencies]
+
 piston = "0.17.0"
 piston2d-graphics = "0.13.0"
 pistoncore-glutin_window = "0.20.0"
