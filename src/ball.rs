@@ -23,10 +23,8 @@ impl Ball {
         if self.position.1 > min && self.position.1 < max {
             let angle = (self.position.1 - mid).abs() as f64 / 20.0;
             if self.position.1 > mid {
-                println!("{:?}", angle);
                 Some(angle)
             } else {
-                println!("{:?}", angle * -1.0);
                 Some(angle * -1.0)
             }
         } else {

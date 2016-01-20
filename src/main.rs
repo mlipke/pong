@@ -21,7 +21,7 @@ fn main() {
     let opengl = OpenGL::V3_2;
 
     let mut window: Window = WindowSettings::new(
-        "pong",
+        "Pong",
         [480, 360]
     )
     .opengl(opengl)
