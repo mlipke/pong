@@ -8,7 +8,8 @@ pub struct App {
     pub gl: GlGraphics,
     pub ball: Ball,
     pub left_paddle: Paddle,
-    pub right_paddle: Paddle
+    pub right_paddle: Paddle,
+    pub state: bool
 }
 
 impl App {
@@ -38,17 +39,19 @@ impl App {
     }
 
     pub fn update(&mut self, args: &UpdateArgs) {
-        self.ball.update();
+        if (self.state) {
+            self.ball.update();
 
-        if self.ball.position.0 == 465.0 {
-            if self.ball.hit(&self.right_paddle) {
-                self.ball.vector.0 = -1.0;
+            if self.ball.position.0 == 465.0 {
+                if self.ball.hit(&self.right_paddle) {
+                    self.ball.vector.0 = -1.0;
+                }
             }
-        }
 
-        if self.ball.position.0 == 15.0 {
-            if self.ball.hit(&self.left_paddle) {
-                self.ball.vector.0 = 1.0;
+            if self.ball.position.0 == 15.0 {
+                if self.ball.hit(&self.left_paddle) {
+                    self.ball.vector.0 = 1.0;
+                }
             }
         }
     }
@@ -63,11 +66,18 @@ impl App {
             Button::Keyboard(Key::Down) => {
                 self.right_paddle.move_paddle(3.0);
             },
+            Button::Keyboard(Key::Space) => {
+                self.toggle_pause();
+            },
             _ => {}
         }
     }
 
     pub fn mouse_paddle(&mut self, args: &[f64; 2]) {
         self.left_paddle.move_paddle(args[1]);
+    }
+
+    pub fn toggle_pause(&mut self) {
+        self.state = !self.state;
     }
 }

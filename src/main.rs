@@ -31,6 +31,7 @@ fn main() {
 
     let mut app = App {
         gl: GlGraphics::new(opengl),
+        state: false,
         ball: Ball {
             rectangle: [0.0, 0.0, 10.0, 10.0],
             position: (240.0, 180.0),
