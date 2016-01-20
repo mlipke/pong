@@ -44,7 +44,7 @@ impl App {
 
             if self.ball.position.0 == 465.0 {
                 if self.ball.hit(&self.right_paddle) {
-                    self.ball.vector.0 = -1.0;
+                    self.ball.reverse();
                 } else {
                     self.ball.update();
                 }
@@ -52,7 +52,7 @@ impl App {
 
             if self.ball.position.0 == 15.0 {
                 if self.ball.hit(&self.left_paddle) {
-                    self.ball.vector.0 = 1.0;
+                    self.ball.reverse();
                 } else {
                     self.ball.update();
                 }

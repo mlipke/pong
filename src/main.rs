@@ -35,7 +35,9 @@ fn main() {
         ball: Ball {
             rectangle: [0.0, 0.0, 10.0, 10.0],
             position: (240.0, 180.0),
-            vector: (1.0, 0.0)
+            angle: -0.1,
+            reference: (240.0, 180.0),
+            direction: 1.0
         },
         left_paddle: Paddle {
             rectangle: [0.0, 0.0, 10.0, 40.0],
