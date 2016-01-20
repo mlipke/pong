@@ -1,8 +1,6 @@
-use piston::window::WindowSettings;
-use piston::event_loop::*;
 use piston::input::*;
-use glutin_window::GlutinWindow as Window;
 use opengl_graphics::{GlGraphics, OpenGL};
+
 use ball::Ball;
 use paddle::Paddle;
 
@@ -41,6 +39,18 @@ impl App {
 
     pub fn update(&mut self, args: &UpdateArgs) {
         self.ball.update();
+
+        if self.ball.position.0 == 465.0 {
+            if self.ball.hit(&self.right_paddle) {
+                self.ball.vector.0 = -1.0;
+            }
+        }
+
+        if self.ball.position.0 == 15.0 {
+            if self.ball.hit(&self.left_paddle) {
+                self.ball.vector.0 = 1.0;
+            }
+        }
     }
 
     pub fn key_paddle(&mut self, args: &Button) {
