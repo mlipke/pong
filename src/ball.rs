@@ -31,4 +31,9 @@ impl Ball {
         self.angle *= -1.0;
         self.reference = self.position;
     }
+
+    pub fn bounce(&mut self) {
+        self.angle *= -1.0;
+        self.reference = self.position;
+    }
 }

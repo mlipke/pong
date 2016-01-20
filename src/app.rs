@@ -1,5 +1,5 @@
 use piston::input::*;
-use opengl_graphics::{GlGraphics, OpenGL};
+use opengl_graphics::GlGraphics;
 
 use ball::Ball;
 use paddle::Paddle;
@@ -15,9 +15,6 @@ pub struct App {
 impl App {
     pub fn render(&mut self, args: &RenderArgs) {
         use graphics::*;
-
-        let (x, y) = ((args.width / 2) as f64,
-                      (args.height / 2) as f64);
 
         let ref ball = self.ball;
         let ref left_paddle = self.left_paddle;
@@ -38,8 +35,8 @@ impl App {
         });
     }
 
-    pub fn update(&mut self, args: &UpdateArgs) {
-        if (self.state) {
+    pub fn update(&mut self) {
+        if self.state {
             self.ball.update();
 
             if self.ball.position.0 == 465.0 {
@@ -61,8 +58,15 @@ impl App {
             if self.ball.position.0 < 10.0 ||
                self.ball.position.0 > 470.0 {
                    self.ball.position = (240.0, 180.0);
+                   self.ball.reference = (240.0, 180.0);
+                   self.ball.angle = 0.0;
                    self.toggle_pause();
-               }
+            }
+
+            if self.ball.position.1 == 0.0 ||
+               self.ball.position.1 == 360.0 {
+                    self.ball.bounce()
+            }
         }
     }
 
