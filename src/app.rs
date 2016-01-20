@@ -79,10 +79,10 @@ impl App {
 
         match *args {
             Button::Keyboard(Key::Up) => {
-                self.right_paddle.move_paddle(-3.0);
+                self.right_paddle.move_paddle(-8.0);
             },
             Button::Keyboard(Key::Down) => {
-                self.right_paddle.move_paddle(3.0);
+                self.right_paddle.move_paddle(8.0);
             },
             Button::Keyboard(Key::Space) => {
                 self.toggle_pause();

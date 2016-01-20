@@ -25,7 +25,7 @@ impl Ball {
             if self.position.1 > mid {
                 Some(angle)
             } else {
-                Some(angle * -1.0)
+                Some(angle * self.direction * -1.0)
             }
         } else {
             None
