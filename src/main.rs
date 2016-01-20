@@ -57,7 +57,11 @@ fn main() {
         }
 
         if let Some(p) = e.press_args() {
-            app.input(&p);
+            app.key_paddle(&p);
+        }
+
+        if let Some(m) = e.mouse_scroll_args() {
+            app.mouse_paddle(&m);
         }
     }
 

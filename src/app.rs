@@ -43,19 +43,21 @@ impl App {
         self.ball.update();
     }
 
-    pub fn input(&mut self, args: &Button) {
+    pub fn key_paddle(&mut self, args: &Button) {
         use piston::input::keyboard::Key;
 
         match *args {
             Button::Keyboard(Key::Up) => {
-                self.left_paddle.move_paddle(-3.0);
                 self.right_paddle.move_paddle(-3.0);
             },
             Button::Keyboard(Key::Down) => {
-                self.left_paddle.move_paddle(3.0);
                 self.right_paddle.move_paddle(3.0);
             },
             _ => {}
         }
+    }
+
+    pub fn mouse_paddle(&mut self, args: &[f64; 2]) {
+        self.left_paddle.move_paddle(args[1]);
     }
 }
