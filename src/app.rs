@@ -43,7 +43,7 @@ impl App {
                 match self.ball.hit(&self.right_paddle) {
                     Some(angle) => {
                         self.ball.angle = angle;
-                        self.ball.reverse();
+                        self.ball.reverse(true);
                     },
                     None => self.ball.update()
                 }
@@ -53,7 +53,7 @@ impl App {
                 match self.ball.hit(&self.left_paddle) {
                     Some(angle) => {
                         self.ball.angle = angle;
-                        self.ball.reverse();
+                        self.ball.reverse(false);
                     },
                     None => self.ball.update()
                 }
@@ -67,8 +67,8 @@ impl App {
                    self.toggle_pause();
             }
 
-            if self.ball.position.1 == 0.0 ||
-               self.ball.position.1 == 360.0 {
+            if self.ball.position.1 < 5.0 ||
+               self.ball.position.1 > 355.0 {
                     self.ball.bounce()
             }
         }

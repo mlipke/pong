@@ -23,18 +23,20 @@ impl Ball {
         if self.position.1 > min && self.position.1 < max {
             let angle = (self.position.1 - mid).abs() as f64 / 20.0;
             if self.position.1 > mid {
+                println!("{:?}", angle);
                 Some(angle)
             } else {
-                Some(angle * self.direction * -1.0)
+                println!("{:?}", angle * -1.0);
+                Some(angle * -1.0)
             }
         } else {
             None
         }
     }
 
-    pub fn reverse(&mut self) {
+    pub fn reverse(&mut self, reverse_angle: bool) {
         self.direction *= -1.0;
-        self.angle *= -1.0;
+        if reverse_angle { self.angle *= -1.0; }
         self.reference = self.position;
     }
 
