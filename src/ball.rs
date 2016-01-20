@@ -15,14 +15,20 @@ impl Ball {
             (self.position.0 - self.reference.0) + self.reference.1;
     }
 
-    pub fn hit(&mut self, paddle: &Paddle) -> bool {
+    pub fn hit(&mut self, paddle: &Paddle) -> Option<f64> {
         let min = paddle.position.1;
+        let mid = paddle.position.1 + 20.0;
         let max = paddle.position.1 + 40.0;
 
         if self.position.1 > min && self.position.1 < max {
-            return true;
+            let angle = (self.position.1 - mid).abs() as f64 / 20.0;
+            if self.position.1 > mid {
+                Some(angle)
+            } else {
+                Some(angle * -1.0)
+            }
         } else {
-            return false;
+            None
         }
     }
 

@@ -35,7 +35,7 @@ fn main() {
         ball: Ball {
             rectangle: [0.0, 0.0, 10.0, 10.0],
             position: (240.0, 180.0),
-            angle: -0.9,
+            angle: 0.0,
             reference: (240.0, 180.0),
             direction: 1.0
         },
@@ -55,7 +55,7 @@ fn main() {
             app.render(&r);
         }
 
-        if let Some(u) = e.update_args() {
+        if let Some(_) = e.update_args() {
             app.update();
         }
 

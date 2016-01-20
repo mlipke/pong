@@ -40,18 +40,22 @@ impl App {
             self.ball.update();
 
             if self.ball.position.0 == 465.0 {
-                if self.ball.hit(&self.right_paddle) {
-                    self.ball.reverse();
-                } else {
-                    self.ball.update();
+                match self.ball.hit(&self.right_paddle) {
+                    Some(angle) => {
+                        self.ball.angle = angle;
+                        self.ball.reverse();
+                    },
+                    None => self.ball.update()
                 }
             }
 
             if self.ball.position.0 == 15.0 {
-                if self.ball.hit(&self.left_paddle) {
-                    self.ball.reverse();
-                } else {
-                    self.ball.update();
+                match self.ball.hit(&self.left_paddle) {
+                    Some(angle) => {
+                        self.ball.angle = angle;
+                        self.ball.reverse();
+                    },
+                    None => self.ball.update()
                 }
             }
 
