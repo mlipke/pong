@@ -106,19 +106,15 @@ impl App {
             }
 
             if self.ball.position.0 < 10.0 {
-                   self.ball.position = (240.0, 180.0);
-                   self.ball.reference = (240.0, 180.0);
-                   self.ball.angle = 0.0;
-                   self.score.1 += 1;
-                   self.toggle_pause();
+                self.score.1 += 1;
+                self.ball.reset();
+                self.toggle_pause();
             }
 
             if self.ball.position.0 > 470.0 {
-                   self.ball.position = (240.0, 180.0);
-                   self.ball.reference = (240.0, 180.0);
-                   self.ball.angle = 0.0;
-                   self.score.0 +=1;
-                   self.toggle_pause();
+                self.score.0 +=1;
+                self.ball.reset();
+                self.toggle_pause();
             }
 
             if self.ball.position.1 < 5.0 ||

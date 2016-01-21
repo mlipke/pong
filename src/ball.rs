@@ -42,4 +42,10 @@ impl Ball {
         self.angle *= -1.0;
         self.reference = self.position;
     }
+
+    pub fn reset(&mut self) {
+        self.position = (240.0, 180.0);
+        self.reference = (240.0, 180.0);
+        self.angle = 0.0;
+    }
 }
