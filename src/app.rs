@@ -1,26 +1,58 @@
 use piston::input::*;
 use opengl_graphics::GlGraphics;
+use opengl_graphics::glyph_cache::GlyphCache;
 
 use ball::Ball;
 use paddle::Paddle;
 
+use std::path::Path;
+
+struct Resources {
+    font: GlyphCache<'static>
+}
+
 pub struct App {
-    pub gl: GlGraphics,
-    pub ball: Ball,
-    pub left_paddle: Paddle,
-    pub right_paddle: Paddle,
-    pub state: bool
+    ball: Ball,
+    left_paddle: Paddle,
+    right_paddle: Paddle,
+    state: bool,
+    resources: Resources
 }
 
 impl App {
-    pub fn render(&mut self, args: &RenderArgs) {
+    pub fn new() -> App {
+        App {
+            state: false,
+            ball: Ball {
+                rectangle: [0.0, 0.0, 10.0, 10.0],
+                position: (240.0, 180.0),
+                angle: 0.0,
+                reference: (240.0, 180.0),
+                direction: 1.0
+            },
+            left_paddle: Paddle {
+                rectangle: [0.0, 0.0, 10.0, 40.0],
+                position: (5.0, 160.0)
+            },
+            right_paddle: Paddle {
+                rectangle: [0.0, 0.0, 10.0, 40.0],
+                position: (465.0, 160.0)
+            },
+            resources: Resources {
+                font: GlyphCache::new(Path::new("assets/retro_computer.ttf")).unwrap()
+            }
+        }
+    }
+
+    pub fn render(&mut self, args: &RenderArgs, gl: &mut GlGraphics) {
         use graphics::*;
 
         let ref ball = self.ball;
         let ref left_paddle = self.left_paddle;
         let ref right_paddle = self.right_paddle;
+        let ref mut resources = self.resources;
 
-        self.gl.draw(args.viewport(), |c, gl| {
+        gl.draw(args.viewport(), |c, gl| {
             clear(color::BLACK, gl);
 
             let trans_left = c.transform.trans(left_paddle.position.0, left_paddle.position.1);
@@ -32,6 +64,11 @@ impl App {
             let trans_ball = c.transform.trans(ball.position.0 - 5.0, ball.position.1 - 5.0);
 
             rectangle(color::WHITE, ball.rectangle, trans_ball, gl);
+
+            let trans_text = c.transform.trans(192.0, 58.0);
+            let mut text = Text::new(48);
+            text.color = color::WHITE;
+            text.draw("test", &mut resources.font, &c.draw_state, trans_text, gl);
         });
     }
 

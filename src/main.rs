@@ -14,8 +14,6 @@ mod ball;
 mod paddle;
 
 use app::App;
-use ball::Ball;
-use paddle::Paddle;
 
 fn main() {
     let opengl = OpenGL::V3_2;
@@ -29,30 +27,13 @@ fn main() {
     .build()
     .unwrap();
 
-    let mut app = App {
-        gl: GlGraphics::new(opengl),
-        state: false,
-        ball: Ball {
-            rectangle: [0.0, 0.0, 10.0, 10.0],
-            position: (240.0, 180.0),
-            angle: 0.0,
-            reference: (240.0, 180.0),
-            direction: 1.0
-        },
-        left_paddle: Paddle {
-            rectangle: [0.0, 0.0, 10.0, 40.0],
-            position: (5.0, 160.0)
-        },
-        right_paddle: Paddle {
-            rectangle: [0.0, 0.0, 10.0, 40.0],
-            position: (465.0, 160.0)
-        }
-    };
+    let mut app = App::new();
+    let mut gl = GlGraphics::new(opengl);
 
     let mut events = window.events();
     while let Some(e) = events.next(&mut window) {
         if let Some(r) = e.render_args() {
-            app.render(&r);
+            app.render(&r, &mut gl);
         }
 
         if let Some(_) = e.update_args() {
